@@ -72,7 +72,7 @@ const load6Players = async () => {
 
         tempPlayer.name = `player-${i}`;
         tempPlayer.key = `${i}`;
-        tempPlayer.cards = await getCards(6);
+        tempPlayer.cards = await getCards(2);
 
         players.push(tempPlayer);
     }
@@ -114,8 +114,6 @@ const addKeyUpPlayersQueue = (player) => {
 const isLastAndPrevCardsSame = () => {
     const countCardsOnDeck = cardsOnDesk.length;
 
-    console.log(`countCardsOnDeck - ${countCardsOnDeck}`);
-
     if (countCardsOnDeck < 2) return false;
     if (cardsOnDesk[countCardsOnDeck - 1].suit === cardsOnDesk[countCardsOnDeck - 2].suit) return true;
 
@@ -128,9 +126,52 @@ const gameTick = () => {
     console.log("Next Step");
     
     const playersInGame = getPlayersInGame();
-    const currentPlayerId = getCurrentPlayerId(playersInGame.length, previousPlayerId);
 
-    if (playersInGame.length <= 1){
+    /* все игроки скинули карты, нет совпадений == ничья */
+    if (!playersInGame){
+        console.log(`game draw`);
+        //stop();
+        return;
+    }
+
+    /* проверяем было ли совпадение карт на предыдущем шаге, если да то ждем нажатий кнопок от пользователей*/
+    /* либо убрать условие и полностью останавливать ? */
+    if (isOnDeckSameCards)
+        return;
+
+    const currentPlayerId = getCurrentPlayerId(playersInGame.length, previousPlayerId);
+    const currentCard = getCurrentCard(playersInGame[currentPlayerId]);
+
+    /* проверяем есть ли карта у текущего игрока, если нет то игрок выходит из игры */
+    if (!currentCard) {
+        setPlayerFinished(playersInGame[currentPlayerId]);
+        console.log('setPlayerFinished', currentPlayerId);
+        return;
+    }
+
+    /* кладем карту на стол */
+    addCardOnDeck(currentCard);
+
+    isOnDeckSameCards = isLastAndPrevCardsSame();
+
+    /* проверяем на совпадение карты */
+    if (isOnDeckSameCards) {
+        console.log("Same cards");
+        //stop();
+    }
+    else {
+        previousPlayerId = currentPlayerId;
+        previousCard = currentCard;
+    }
+    
+    console.log('players in game', playersInGame);
+    console.log('current player id', currentPlayerId);
+    console.log('current card', currentCard);
+    console.log('cards on deck', cardsOnDesk); 
+    
+    
+
+    /*if (playersInGame.length <= 1){
         //один игрок остался
         stop();
         console.log('stop game');
@@ -152,7 +193,7 @@ const gameTick = () => {
                 previousPlayerId = currentPlayerId;
                 previousCard = currentCard;
             }
-        }/* у игрока закончились карты */
+        }// у игрока закончились карты 
         else{
             setPlayerFinished(players[currentPlayerId]);   
             console.log('setPlayerFinished', currentPlayerId);
@@ -160,19 +201,19 @@ const gameTick = () => {
 
         console.log('players in game', playersInGame);
         console.log('current player id', currentPlayerId);
-        //console.log('current card', currentCard);
-        //console.log('cards on deck', cardsOnDesk);        
-    }
+        console.log('current card', currentCard);
+        console.log('cards on deck', cardsOnDesk);        
+    }*/
 }
 
 const start = () => {
-    if (!nIntervId)
-        nIntervId = setInterval(gameTick, delay);
+    //if (!nIntervId)
+    //    nIntervId = setInterval(gameTick, delay);
 }
 
 const stop = () => {
-    clearInterval(nIntervId);
-    nIntervId = null;
+    //clearInterval(nIntervId);
+    //nIntervId = null;
 }
 
 /* ---------------------------------------- */
