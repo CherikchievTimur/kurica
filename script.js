@@ -125,85 +125,71 @@ const removeKeyUpPlayersQueue = () => keyUpPlayersQueue.splice(0, keyUpPlayersQu
 const gameTick = () => {
     console.log("Next Step");
     
-    const playersInGame = getPlayersInGame();
+    let playersInGame = getPlayersInGame();
 
+    console.log('players in game', playersInGame);
+
+    /* есть игроки - игра продолжается */
+    if (playersInGame.length > 0) {
+        /* проверяем было ли совпадение карт на предыдущем шаге, если да то ждем нажатий кнопок от пользователей*/
+        /* либо убрать условие и полностью останавливать ? */
+        if (!isOnDeckSameCards){
+
+            const currentPlayerId = getCurrentPlayerId(playersInGame.length, previousPlayerId);
+            const currentCard = getCurrentCard(playersInGame[currentPlayerId]);
+
+            /* проверяем есть ли карта у текущего игрока, если есть то кладем на стол */
+            if(currentCard){
+                /* кладем карту на стол */
+                addCardOnDeck(currentCard);
+
+                isOnDeckSameCards = isLastAndPrevCardsSame();
+
+                /* проверяем на совпадение карты */
+                if (isOnDeckSameCards) {
+                    console.log("Same cards");
+                    //stop();
+                }
+                else {
+                    previousPlayerId = currentPlayerId;
+                    previousCard = currentCard;
+                }
+
+                console.log('current player id', currentPlayerId);
+                console.log('current card', currentCard);
+                console.log('cards on deck', cardsOnDesk); 
+            }
+            /* у игрока больше нет карт - выводим игрока из игры */
+            else {
+                setPlayerFinished(playersInGame[currentPlayerId]);
+                console.log('setPlayerFinished', currentPlayerId);
+
+                playersInGame = getPlayersInGame();
+
+                /*проверяем кол-во игроков в игре, если остался 1 игрок, останавливаем игру */
+                if (playersInGame.length === 1) {
+                    /* проверяем есть ли карты у игрока */
+                    /* если есть, игрок проиграл */
+                    
+                    if(playersInGame[0].cards.length > 0){
+                        console.log('game over - ', playersInGame[0]);
+                    }
+                    /* если карт нет - то ничья */
+                    else {
+                        console.log(`game draw`);
+                    }
+
+                    //stop();
+                    setPlayerFinished(playersInGame[0]);
+                }
+            }            
+        }
+    }
     /* все игроки скинули карты, нет совпадений == ничья */
-    if (!playersInGame){
+    else{
         console.log(`game draw`);
         //stop();
-        return;
-    }
-
-    /* проверяем было ли совпадение карт на предыдущем шаге, если да то ждем нажатий кнопок от пользователей*/
-    /* либо убрать условие и полностью останавливать ? */
-    if (isOnDeckSameCards)
-        return;
-
-    const currentPlayerId = getCurrentPlayerId(playersInGame.length, previousPlayerId);
-    const currentCard = getCurrentCard(playersInGame[currentPlayerId]);
-
-    /* проверяем есть ли карта у текущего игрока, если нет то игрок выходит из игры */
-    if (!currentCard) {
-        setPlayerFinished(playersInGame[currentPlayerId]);
-        console.log('setPlayerFinished', currentPlayerId);
-        return;
-    }
-
-    /* кладем карту на стол */
-    addCardOnDeck(currentCard);
-
-    isOnDeckSameCards = isLastAndPrevCardsSame();
-
-    /* проверяем на совпадение карты */
-    if (isOnDeckSameCards) {
-        console.log("Same cards");
-        //stop();
-    }
-    else {
-        previousPlayerId = currentPlayerId;
-        previousCard = currentCard;
-    }
-    
-    console.log('players in game', playersInGame);
-    console.log('current player id', currentPlayerId);
-    console.log('current card', currentCard);
-    console.log('cards on deck', cardsOnDesk); 
-    
-    
-
-    /*if (playersInGame.length <= 1){
-        //один игрок остался
-        stop();
-        console.log('stop game');
-    }
-    else if (!isOnDeckSameCards) {
-        const currentCard = getCurrentCard(playersInGame[currentPlayerId]);
-
-        if(currentCard){
-            addCardOnDeck(currentCard);
-
-            isOnDeckSameCards = isLastAndPrevCardsSame();
-
-            if (isOnDeckSameCards)
-            {
-                console.log("Same cards");
-                //stop();
-            }
-            else{
-                previousPlayerId = currentPlayerId;
-                previousCard = currentCard;
-            }
-        }// у игрока закончились карты 
-        else{
-            setPlayerFinished(players[currentPlayerId]);   
-            console.log('setPlayerFinished', currentPlayerId);
-        }
-
-        console.log('players in game', playersInGame);
-        console.log('current player id', currentPlayerId);
-        console.log('current card', currentCard);
-        console.log('cards on deck', cardsOnDesk);        
-    }*/
+    }    
 }
 
 const start = () => {
@@ -222,7 +208,9 @@ const keyUp = (e) => {
 
     const player = getPlayerByKey(players, e.key);
 
+    /* проверяем нажатую кнопку, принадлежит ли игроку */
     if(player){
+        /* если на столе одинаковые масти карт */
         if (isOnDeckSameCards){
             addKeyUpPlayersQueue(player);
 
@@ -241,9 +229,13 @@ const keyUp = (e) => {
                 console.log(players);
             }
         }
+        /* игрок случайно нажал на кнопку, забирает все карты */
         else{        
             addCardsOnDeckToPlayer(player);
             removeCardsOnDeck();
+
+            /* лог, убрать после отладки */
+            console.log('players in game', getPlayersInGame());
         }
     }
 
