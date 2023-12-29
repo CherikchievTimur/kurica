@@ -3,13 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/1b15f935e9.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
-    <input type="number" name="players" id="players" placeholder="Enter players..." onchange="onChangeCount(event)">
+    <!--<input type="number" name="players" id="players" placeholder="Enter players..." onchange="onChangeCount(event)">
     <button onclick="onClickNewGame()">New</button>
-    <button onclick="onClickNextStep()">Next</button>
+    <button onclick="onClickNextStep()">Next</button>-->
+
+
+    <div class="container">
+
+        <div class="left">
+            <div id="players">
+                <div>
+                    <label for="player1">Player 1:</label>
+                    <input type="text" id="player1" placeholder="Enter name">
+                </div>
+                <div>
+                    <label for="player2">Player 2:</label>
+                    <input type="text" id="player2" placeholder="Enter name">
+                </div>
+            </div>
+            <button id="addPlayer">Add Player</button>
+        </div>
+
+        <div class="controls">
+            <button id="updateButton">
+                <i class="fa-solid fa-rotate"></i> Update
+            </button>
+            <button id="playButton">
+                <i class="fas fa-play"></i> Play
+            </button>
+            <button id="pauseButton">
+                <i class="fas fa-pause"></i> Pause
+            </button>
+            <button id="volumeButton">
+                <i class="fa-solid fa-volume-high"></i> Volume high
+            </button>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
