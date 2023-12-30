@@ -82,6 +82,8 @@ const load6Players = async () => {
 
 const removePlayers = () => players.splice(0, players.length);
 
+/* вышедший игрок */
+
 const setPlayerFinished = (player) => player.finished = ++finished;
 
 const addCardsOnDeckToPlayer = (player) => player.cards.push(...cardsOnDesk);
