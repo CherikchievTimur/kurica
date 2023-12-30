@@ -86,6 +86,7 @@ const removePlayers = () => players.splice(0, players.length);
 
 const setPlayerFinished = (player) => player.finished = ++finished;
 
+/* передать карты игроку */
 const addCardsOnDeckToPlayer = (player) => player.cards.push(...cardsOnDesk);
 
 const getPlayersInGame = () => players.filter(player => !player.finished);
