@@ -78,6 +78,8 @@ const load6Players = async () => {
     }
 }
 
+/* удалить всех играковв */
+
 const removePlayers = () => players.splice(0, players.length);
 
 const setPlayerFinished = (player) => player.finished = ++finished;
@@ -248,7 +250,7 @@ const keyUp = (e) => {
 
 const onChangeCount = (e) => playersCount = e.target.value;
 
-const onClickNewGame = () => {
+const onClickNewGame2 = () => {
     console.log("New Game");
 
     newGame();
@@ -281,6 +283,7 @@ document.getElementById("addPlayer").addEventListener("click", function () {
     input.setAttribute("type", "text");
     input.setAttribute("id", `player${numPlayers + 1}`);
     input.setAttribute("placeholder", "Enter name");
+    input.setAttribute("class", "player");
 
     newPlayerDiv.appendChild(label);
     newPlayerDiv.appendChild(input);
@@ -296,3 +299,20 @@ document.getElementById("addPlayer").addEventListener("click", function () {
         newPlayerDiv.appendChild(minusButton);
     }
 });
+
+const onClickNewGame = () => {
+    /*let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+width=600,height=300,left=100,top=100`;
+
+    open('/', 'test', params);*/
+
+
+    /*const players = document.querySelectorAll(".player");
+
+    console.log(players)
+
+    for (let player of players){
+        alert(player.value);
+    }*/
+
+}
