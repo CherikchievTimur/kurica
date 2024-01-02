@@ -89,6 +89,7 @@ const setPlayerFinished = (player) => player.finished = ++finished;
 /* передать карты игроку */
 const addCardsOnDeckToPlayer = (player) => player.cards.push(...cardsOnDesk);
 
+/* jkjjk */
 const getPlayersInGame = () => players.filter(player => !player.finished);
 
 const getCurrentPlayerId = (players, previousPlayerId) => ++previousPlayerId % players;
