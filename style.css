@@ -1,5 +1,48 @@
+:root {
+    
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
+    font-family: 'Righteous', sans-serif;
+    text-transform: uppercase;
+}
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(88, 88, 88);
+    box-shadow: 0px 2px 5px lightgray;
+    padding: 1em;
+
+    text-shadow: 0px 5px 5px lightgray;
+}
+
+.logo{
+    font-size: 2em;
+    color: tomato;
+}
+
+.fa-egg{
+    color: rgb(88, 88, 88);;
+}
+
+.menu-link{
+    color: rgb(88, 88, 88);
+    
+    text-decoration: none;
+    margin: 10px;
+    font-size: 1.2em;
+}
+
+.menu-link:hover{
+    color: tomato;
+    
+    /*background-color: tomato;
+    color: white;
+    box-shadow: 5px 5px 15px lightgray;*/
 }

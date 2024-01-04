@@ -4,13 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/1b15f935e9.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
-    <input type="number" name="players" id="players" placeholder="Enter players..." onchange="onChangeCount(event)">
+    <header class="header">
+        <div class="navbar">
+            <div class="sub-navbar">                
+                <span class="logo"><i class="fa-solid fa-egg"></i> kurica</span>
+            </div>
+            <div class="sub-navbar">
+                <nav class="menu main-menu">
+                    <a href="#" class="menu-link new-game" onclick="test()"><i class="fa-solid fa-gamepad"></i> New Game</a>
+                    <a href="#" class="menu-link pause" onclick="test()"><i class="fa-solid fa-pause"></i> Pause</a>
+                    <a href="#" class="menu-link stop" onclick="test()"><i class="fa-solid fa-stop"></i> Exit</a>
+                </nav>
+            </div>
+            <div class="sub-navbar">
+                <nav class="menu set-menu">
+                    <a href="#" class="menu-link music"><i class="fa-solid fa-volume-high"></i> Music</a>
+                    <a href="#" class="menu-link about"><i class="fa-solid fa-gear"></i> About</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <main class="main"></main>
+
+    <footer class="footer">
+
+    </footer>
+
+    <!--<input type="number" name="players" id="players" placeholder="Enter players..." onchange="onChangeCount(event)">
     <button onclick="onClickNewGame()">New</button>
-    <button onclick="onClickNextStep()">Next</button>
+    <button onclick="onClickNextStep()">Next</button>-->
 
     <script src="script.js"></script>
 </body>

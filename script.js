@@ -268,3 +268,6 @@ const onClickNextStep = () => {
     //console.log(nextStep());
     gameTick();
 }
+
+
+const test = () => alert("hello")
