@@ -2,6 +2,8 @@ let localDeckId = null;//localStorage.getItem("deckId");
 
 /* ---------------------------------------- */
 
+let isMusic = true;
+
 const player = {
     name: " ",
     key: "",
@@ -271,3 +273,16 @@ const onClickNextStep = () => {
 
 
 const test = () => alert("hello")
+
+/* ----------------------- */
+
+const onClickMusic = () =>{
+    const aMusic = document.querySelector(".a-volume");
+
+    if(isMusic)
+        aMusic.className = 'fa-solid fa-volume-xmark a-volume';
+    else
+        aMusic.className = 'fa-solid fa-volume-high a-volume';
+
+    isMusic = !isMusic;
+}
