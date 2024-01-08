@@ -282,6 +282,15 @@ const test = () => alert("hello")
     //< a href = "#" class="menu-link add-player" onclick = "test()" > <i class="fa-solid fa-plus"></i> Add player</a >
 
 const onClickNewGame = () => {
+    /*const main = document.querySelector(".main");
+
+    const addPlayer = document.createElement("a");
+    addPlayer.href = "#";
+    addPlayer.className = "menu-link add-player";
+    addPlayer.innerHTML = "<i class='fa-solid fa-plus'></i> Add player";
+    addPlayer.onclick = test;
+
+    main.append(addPlayer);*/
 
     newGameWindow();
 
@@ -296,6 +305,13 @@ const onClickNewGame = () => {
     mainMenu.append(link);*/
 }
 
+const onClickAddPlayer = () => {
+    const playerItem = createElementPlayerItem();
+    const playersList = document.querySelector(".players-list");
+
+    playersList.append(playerItem);
+}
+
 const newGameWindow = () => {
 
     /* созаем кнопки */
@@ -303,7 +319,7 @@ const newGameWindow = () => {
     addPlayer.href = "#";
     addPlayer.className = "menu-link add-player";
     addPlayer.innerHTML = "<i class='fa-solid fa-plus'></i> Add player";    
-    addPlayer.onclick = test;
+    addPlayer.onclick = onClickAddPlayer;
 
     const startGame = document.createElement("a");
     startGame.href = "#";
@@ -350,26 +366,6 @@ const getRandPlayerKey = () => {
 
     return key;
 }
-/*
- 
-<li class="player-item">
-                        <div class="player">
-                            <img class="player-ico" src="img/test.png" alt="Person">
-
-                            <div class="player-name-item">
-                                <input class="player-name" type="text" name="player-name" id="player-name"
-                                    placeholder="Enter players name...">
-
-                            </div>
-
-                            <div class="player-key-item">
-                                <input class="player-key" type="text" name="player-key" id="player-key" placeholder="Enter key..." value="1"
-                                    maxlength="1">
-                            </div>
-                        </div>
-                    </li>
- 
-*/
 
 const createElementPlayersList = () => {
     const players = document.createElement("ul");
