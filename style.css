@@ -22,7 +22,7 @@
     box-shadow: 0px -6px 10px rgba(255, 255, 255, 1), 0px 4px 15px rgba(0, 0, 0, 0.15);
     padding: 1em;
 
-    /*text-shadow: 0px 5px 5px var(--shadow-color);*/
+    text-shadow: 0px 5px 5px var(--shadow-color);
 }
 
 .logo{
@@ -73,13 +73,13 @@
     padding: 1em;
     margin: 1em;
     transition: .5s;
-    /*text-shadow: 0px 5px 5px var(--shadow-color);*/
+    text-shadow: 0px 5px 5px var(--shadow-color);
 
     border: 1px solid var(--shadow-color);
     border-radius: .5em;
     backdrop-filter: blur(32px);
-    background-color: rgba(255, 255, 255, 0.5);
-    /*box-shadow: 0px -6px 10px rgba(255, 255, 255, 0.5), 0px 4px 15px rgba(0, 0, 0, 0.15);*/
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0px -6px 10px rgba(255, 255, 255, 0), 0px 4px 15px rgba(0, 0, 0, 0.15);
 }
 
 .players-list{
@@ -96,7 +96,7 @@
     align-items: center;
     gap: 1em;
     border: 1px solid var(--shadow-color);
-    /*box-shadow: 0px -6px 10px rgba(255, 255, 255, 0.5), 0px 4px 15px rgba(0, 0, 0, 0.15);*/
+    box-shadow: 0px -6px 10px rgba(255, 255, 255, 0), 0px 4px 15px rgba(0, 0, 0, 0.15);
     border-radius: .5em;
     padding: .5em 1em;
 
