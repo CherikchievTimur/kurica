@@ -279,30 +279,18 @@ const test = () => alert("hello")
 
 /* ---------------------------------------- */
 
-    //< a href = "#" class="menu-link add-player" onclick = "test()" > <i class="fa-solid fa-plus"></i> Add player</a >
 
 const onClickNewGame = () => {
-    /*const main = document.querySelector(".main");
-
-    const addPlayer = document.createElement("a");
-    addPlayer.href = "#";
-    addPlayer.className = "menu-link add-player";
-    addPlayer.innerHTML = "<i class='fa-solid fa-plus'></i> Add player";
-    addPlayer.onclick = test;
-
-    main.append(addPlayer);*/
-
     newGameWindow();
+}
 
-    /*const link = document.createElement("a");
-    link.href = "#";
-    link.className = "menu-link add-player";
-    link.onclick = test;
+const createElement = (tag, properties = {} ) => {
+    const element = document.createElement(tag);
 
-    link.innerHTML = "<i class='fa-solid fa-plus'></i> Add player";    
+    for (let property in properties)
+        element[property] = properties[property];
 
-    const mainMenu = document.querySelector(".main-menu");
-    mainMenu.append(link);*/
+    return element;
 }
 
 const onClickAddPlayer = () => {
@@ -315,11 +303,18 @@ const onClickAddPlayer = () => {
 const newGameWindow = () => {
 
     /* созаем кнопки */
-    const addPlayer = document.createElement("a");
+    const addPlayer = createElement("a", properties = { 
+        className: "menu-link add-player", 
+        href: "#",
+        innerHTML: "<i class='fa-solid fa-plus'></i> Add player",
+        onclick: onClickAddPlayer
+     });
+    
+    /*const addPlayer = document.createElement("a");
     addPlayer.href = "#";
     addPlayer.className = "menu-link add-player";
-    addPlayer.innerHTML = "<i class='fa-solid fa-plus'></i> Add player";    
-    addPlayer.onclick = onClickAddPlayer;
+    addPlayer.innerHTML = "<i class='fa-solid fa-plus'></i> Add player";
+    addPlayer.onclick = onClickAddPlayer;*/
 
     const startGame = document.createElement("a");
     startGame.href = "#";
@@ -350,9 +345,19 @@ const newGameWindow = () => {
     main.append(window);
 }
 
-const getRandPlayerIco = () => "img/test.png";
+const getRandPlayerIco = () => {
+    const randInt = (~~(Math.random() * 100)) % 29;
 
-const onClickPlayerIco = (e) => e.target.img = getRandPlayerIco();
+    return `img/${randInt}.png`;
+}
+
+const onClickPlayerIco = (e) => {
+    const img = getRandPlayerIco();
+
+    console.log(img);
+
+    e.img = img;
+}
 
 const isUseKey = (key) => players.find((player) => player.key === key);
 
